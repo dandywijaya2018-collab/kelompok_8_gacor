@@ -22,6 +22,29 @@ void barangAwal() {
 
 }
 
+void cariBarang() {
+    string key;
+    cout << "\nMasukkan nama barang yang dicari: ";
+    cin.ignore();
+    getline(cin, key);
+
+    bool ditemukan = false;
+
+    for(int i = 0; i < jumlahBarang; i++) {
+        if(dataBarang[i].nama == key) {
+            cout << "\n--- Barang Ditemukan ---\n";
+            cout << "Nama   : " << dataBarang[i].nama << endl;
+            cout << "Stok   : " << dataBarang[i].stok << endl;
+            cout << "Lokasi : " << dataBarang[i].lokasi << endl;
+            ditemukan = true;
+            break;       
+        }
+    }
+
+    if (!ditemukan) {
+        cout << "\nBarang tidak ditemukan!\n";
+    }
+}
 
 
 
