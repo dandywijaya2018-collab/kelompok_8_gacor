@@ -46,5 +46,9 @@ void cariBarang() {
     }
 }
 
-
-
+void tampilBarang() {
+    cout << " ===DATA BARANG=== " << endl;
+    for (int i = 0; i < jumlahBarang; i++){
+        cout << i+1 << "." << dataBarang[i].nama << "| Stok: " << dataBarang[i].stok << "| Lokasi: " << dataBarang[i].lokasi << endl;
+    }
+}
