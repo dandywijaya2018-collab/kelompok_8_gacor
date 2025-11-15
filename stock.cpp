@@ -2,6 +2,15 @@
 #include <string>
 using namespace std;
 
+struct Barang {
+    string nama;
+    int stok;
+    string lokasi;
+};
+
+Barang dataBarang[50];
+int jumlahBarang = 0;
+
 void barangAwal() {
     dataBarang[0] = {"Rokok Marlboro", 20, "Rak 4"};
     dataBarang[1] = {"Rokok Sampoerna", 20, "Rak 4"};
