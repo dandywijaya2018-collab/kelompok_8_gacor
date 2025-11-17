@@ -22,6 +22,8 @@ void barangAwal() {
 
 }
 
+
+
 void cariBarang() {
     string key;
     cout << "\nMasukkan nama barang yang dicari: ";
