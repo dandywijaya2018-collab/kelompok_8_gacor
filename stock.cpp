@@ -15,6 +15,7 @@ void barangAwal();
 void inputBarang();
 void tampilBarang();
 void cariBarang();
+void tambahStok();
 
 int main() {
     barangAwal();
@@ -61,7 +62,7 @@ void inputBarang() {
     int tambah;
     cout << "\nBerapa barang baru yang ingin dimasukkan? ";
     cin >> tambah;
-    cin.ignore(); 
+    cin.ignore(10000, '\n'); 
 
     if (jumlahBarang + tambah > 50) {
         cout << "Kapasitas penyimpanan penuh! Maksimal 50 barang.\n";
@@ -76,7 +77,7 @@ void inputBarang() {
 
         cout << "Stok Barang  : ";
         cin >> dataBarang[i].stok;
-        cin.ignore(); 
+        cin.ignore(10000, '\n'); 
 
         cout << "Lokasi Rak   : ";
         getline(cin, dataBarang[i].lokasi);
@@ -94,6 +95,10 @@ void tampilBarang() {
 
     cout << "\n=== DATA BARANG ===\n";
     for(int i = 0; i < jumlahBarang; i++) {
+        string warning ="";
+        if (dataBarang[i].stok < 5){
+            warning = " <-- PERINGATAN: Stok hampir habis!";
+        }
         cout << i+1 << ". " << dataBarang[i].nama
              << " | Stok: " << dataBarang[i].stok
              << " | Lokasi: " << dataBarang[i].lokasi << endl;
@@ -103,7 +108,7 @@ void tampilBarang() {
 void cariBarang() {
     string key;
     cout << "\nMasukkan nama barang yang dicari: ";
-    cin.ignore(); 
+    cin.ignore(10000, '\n'); 
     getline(cin, key);
 
     bool ditemukan = false;
@@ -122,4 +127,34 @@ void cariBarang() {
     if(!ditemukan) {
         cout << "\nBarang \"" << key << "\" tidak ditemukan!\n";
     }
+}
+
+void tambahStok() {
+    string key;
+    cout << "\nmasukan nama barang yang akan ditambahakan stoknya: ";
+    cin.ignore(10000, '\n')
+    getline(cin, key)
+
+    int idx = -1;
+    for (int i = 0; i < jumlahBarang; i++){
+        if (dataBarang[i].nama == key) {
+            idx = 1;
+            break;
+        }
+    }
+    if (idx == -1) {
+        cout << "Barang \"" << key << "\" tidak ditemukan. Tidak ada perubahan.\n";
+        return;
+    }
+    int tambah;
+    cout << "Stok saat ini: " << dataBarang[idx].stok << endl;
+    cout << "Berapa jumlah yang ingin ditambahkan? ";
+    cin >> tambah;
+    if (tambah <= 0) {
+        cout << "Jumlah tambahan harus > 0.\n";
+    return;
+    }
+    dataBarang[idx].stok += tambah;
+    cout << "Stok berhasil diperbarui. Stok baru " << dataBarang[idx].nama
+         << " : " << dataBarang[idx].stok << endl;
 }
