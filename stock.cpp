@@ -11,6 +11,42 @@ struct Barang {
 Barang dataBarang[50];
 int jumlahBarang = 0;
 
+void barangAwal();
+void inputBarang();
+void tampilBarang();
+void cariBarang();
+
+int main() {
+    barangAwal();
+
+    int pilihan;
+    char ulang;
+
+    do {
+        cout << "\n===== MENU PROGRAM =====\n";
+        cout << "1. Input Barang Baru\n";
+        cout << "2. Lihat Semua Barang\n";
+        cout << "3. Cari Barang\n";
+        cout << "4. Keluar\n";
+        cout << "Pilih menu: ";
+        cin >> pilihan;
+
+        switch(pilihan) {
+            case 1: inputBarang(); break;
+            case 2: tampilBarang(); break;
+            case 3: cariBarang(); break;
+            case 4: cout << "Program selesai.\n"; return 0;
+            default: cout << "Pilihan tidak valid!\n"; break;
+        }
+
+        cout << "\nIngin kembali ke menu? (y/n): ";
+        cin >> ulang;
+
+    } while(ulang == 'y' || ulang == 'Y');
+
+    return 0;
+}
+
 void barangAwal() {
     dataBarang[0] = {"Rokok Marlboro", 20, "Rak 4"};
     dataBarang[1] = {"Rokok Sampoerna", 20, "Rak 4"};
@@ -19,15 +55,55 @@ void barangAwal() {
     dataBarang[4] = {"Teh", 60, "Rak 3"};
     
     jumlahBarang = 5; 
-
 }
 
+void inputBarang() {
+    int tambah;
+    cout << "\nBerapa barang baru yang ingin dimasukkan? ";
+    cin >> tambah;
+    cin.ignore(); 
 
+    if (jumlahBarang + tambah > 50) {
+        cout << "Kapasitas penyimpanan penuh! Maksimal 50 barang.\n";
+        return;
+    }
+
+    for(int i = jumlahBarang; i < jumlahBarang + tambah; i++) {
+        cout << "\nBarang ke-" << i+1 << endl;
+        
+        cout << "Nama Barang  : ";
+        getline(cin, dataBarang[i].nama);
+
+        cout << "Stok Barang  : ";
+        cin >> dataBarang[i].stok;
+        cin.ignore(); 
+
+        cout << "Lokasi Rak   : ";
+        getline(cin, dataBarang[i].lokasi);
+    }
+
+    jumlahBarang += tambah;
+    cout << "Data berhasil ditambahkan!\n";
+}
+
+void tampilBarang() {
+    if (jumlahBarang == 0) {
+        cout << "\nBelum ada data barang.\n";
+        return;
+    }
+
+    cout << "\n=== DATA BARANG ===\n";
+    for(int i = 0; i < jumlahBarang; i++) {
+        cout << i+1 << ". " << dataBarang[i].nama
+             << " | Stok: " << dataBarang[i].stok
+             << " | Lokasi: " << dataBarang[i].lokasi << endl;
+    }
+}
 
 void cariBarang() {
     string key;
     cout << "\nMasukkan nama barang yang dicari: ";
-    cin.ignore();
+    cin.ignore(); 
     getline(cin, key);
 
     bool ditemukan = false;
@@ -39,18 +115,11 @@ void cariBarang() {
             cout << "Stok   : " << dataBarang[i].stok << endl;
             cout << "Lokasi : " << dataBarang[i].lokasi << endl;
             ditemukan = true;
-            break;       
+            break; 
         }
     }
 
-    if (!ditemukan) {
-        cout << "\nBarang tidak ditemukan!\n";
-    }
-}
-
-void tampilBarang() {
-    cout << " ===DATA BARANG=== " << endl;
-    for (int i = 0; i < jumlahBarang; i++){
-        cout << i+1 << "." << dataBarang[i].nama << "| Stok: " << dataBarang[i].stok << "| Lokasi: " << dataBarang[i].lokasi << endl;
+    if(!ditemukan) {
+        cout << "\nBarang \"" << key << "\" tidak ditemukan!\n";
     }
 }
