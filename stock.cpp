@@ -96,7 +96,8 @@ void tampilBarang() {
         }
         cout << i+1 << ". " << dataBarang[i].nama
              << " | Stok: " << dataBarang[i].stok
-             << " | Lokasi: " << dataBarang[i].lokasi << endl;
+             << " | Lokasi: " << dataBarang[i].lokasi 
+             << warning << endl;
     }
 }
 
