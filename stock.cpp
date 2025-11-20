@@ -128,33 +128,3 @@ void cariBarang() {
         cout << "\nBarang \"" << key << "\" tidak ditemukan!\n";
     }
 }
-
-void tambahStok() {
-    string key;
-    cout << "\nmasukan nama barang yang akan ditambahakan stoknya: ";
-    cin.ignore(10000, '\n')
-    getline(cin, key)
-
-    int idx = -1;
-    for (int i = 0; i < jumlahBarang; i++){
-        if (dataBarang[i].nama == key) {
-            idx = 1;
-            break;
-        }
-    }
-    if (idx == -1) {
-        cout << "Barang \"" << key << "\" tidak ditemukan. Tidak ada perubahan.\n";
-        return;
-    }
-    int tambah;
-    cout << "Stok saat ini: " << dataBarang[idx].stok << endl;
-    cout << "Berapa jumlah yang ingin ditambahkan? ";
-    cin >> tambah;
-    if (tambah <= 0) {
-        cout << "Jumlah tambahan harus > 0.\n";
-    return;
-    }
-    dataBarang[idx].stok += tambah;
-    cout << "Stok berhasil diperbarui. Stok baru " << dataBarang[idx].nama
-         << " : " << dataBarang[idx].stok << endl;
-}
