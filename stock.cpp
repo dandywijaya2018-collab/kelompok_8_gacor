@@ -64,11 +64,6 @@ void inputBarang() {
     cin >> tambah;
     cin.ignore(10000, '\n'); 
 
-    if (jumlahBarang + tambah > 50) {
-        cout << "Kapasitas penyimpanan penuh! Maksimal 50 barang.\n";
-        return;
-    }
-
     for(int i = jumlahBarang; i < jumlahBarang + tambah; i++) {
         cout << "\nBarang ke-" << i+1 << endl;
         
